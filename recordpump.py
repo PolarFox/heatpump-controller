@@ -37,9 +37,7 @@ def decode(values):
                 hp.load_bytes(cur)
         except Exception as e:
                 print(e)
-                #traceback.print_exc(file=sys.stdout)
                 print("Failed decode")
-        #print(str(z))
 
 while True:
         s_res = select.select([f], [], [], 0.1)
