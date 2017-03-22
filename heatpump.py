@@ -128,7 +128,7 @@ class HeatPump(object):
         # BYTE 17 CHECKSUM
         # Sum and truncate
         # Sample [0x23, 0xCB, 0x26, 0x01, 0x00, 0x20, 0x08, 0x05, 0x30, 0x45, 0x54,0x00,0x00,0x00,0x00,0x00,0x00] = 0x0b
-        ret.append(sum(ret) & 0xFF)
+        ret.append(round(sum(ret)) & 0xFF)
         return ret
 
     def encode(self, req_bytes=None):
@@ -151,7 +151,7 @@ class HeatPump(object):
             for shift in range(8):
                 mask = 0x1<<shift
                 ret.append(HVAC_MISTSUBISHI_BIT_MARK)
-                if (mask&byte) == 0:
+                if (round(mask)&round(byte)) == 0:
                     ret.append(HVAC_MISTSUBISHI_ZERO_SPACE)
                 else:
                     ret.append(HVAC_MISTSUBISHI_ONE_SPACE)
@@ -164,7 +164,7 @@ class HeatPump(object):
             for shift in range(8):
                 mask = 0x1<<shift
                 ret.append(HVAC_MISTSUBISHI_BIT_MARK)
-                if (mask&byte) == 0:
+                if (round(mask)&round(byte)) == 0:
                     ret.append(HVAC_MISTSUBISHI_ZERO_SPACE)
                 else:
                     ret.append(HVAC_MISTSUBISHI_ONE_SPACE)

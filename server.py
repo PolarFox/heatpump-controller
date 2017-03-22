@@ -23,7 +23,7 @@ import threading
 import select
 import json
 import struct
-import urllib2
+import urllib
 try:
    import cPickle as pickle
 except:
@@ -56,10 +56,10 @@ def decode(values):
     except:
         return
     # Send an update back to ourself
-    req = urllib2.Request("http://localhost/api/update")
+    req = urllib.Request("http://localhost/api/update")
     req.add_header('Content-Type', 'application/json')
     try:
-        response = urllib2.urlopen(req, json.dumps({'data': cur}))
+        response = urllib.urlopen(req, json.dumps({'data': cur}))
         _ = json.load(response)
     except:
         pass
@@ -155,7 +155,7 @@ def set():
     if 'wide_vane' in data:
         pump.wide_vane = data['wide_vane']
     if 'fan_speed' in data:
-        pump.fan_speed = pump.set_fan(data['fan_speed'])
+        pump.set_fan(data['fan_speed'])
     if 'vane' in data:
         pump.vane = data['vane']
     if 'clock' in data:
