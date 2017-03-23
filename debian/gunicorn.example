@@ -1,0 +1,18 @@
+#gunicorn-debian example config working with Raspberry Pi default user.
+
+CONFIG = {
+    'mode': 'wsgi',
+    'working_dir': '/home/pi/heatpump',
+    'python': '/home/pi/flaskenv/bin/python',
+    'enviroment': {
+        'FLASK_APP': 'server',
+        'PATH': '/home/pi/flaskenv/bin:$PATH',
+        'VIRTUAL_ENV': '/home/pi/flaskenv'
+    },
+    'args': (
+        '--bind=127.0.0.1:8080',
+        '--workers=1',
+        '--timeout=120',
+        'server:app'
+    ),
+}
